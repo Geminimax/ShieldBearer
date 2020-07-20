@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://Intro.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Intro.gd" type="Script" id=1]
 [ext_resource path="res://Level/Level1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Intro/Agameby3.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Intro/geminimax2.png" type="Texture" id=4]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Assets/Audio/coinget.wav" type="AudioStream" id=16]
 [ext_resource path="res://Assets/Audio/sb2.ogg" type="AudioStream" id=17]
 [ext_resource path="res://Assets/NewScreen4.png" type="Texture" id=18]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

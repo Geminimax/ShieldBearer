@@ -3,8 +3,9 @@
 [ext_resource path="res://Level/BaseLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Nodes/Loot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Level/Level2.tscn" type="PackedScene" id=3]
-[ext_resource path="res://LevelText.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Nodes/LevelText.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Audio/sb.ogg" type="AudioStream" id=5]
+
 
 [node name="Level1" instance=ExtResource( 1 )]
 next_level = ExtResource( 3 )

@@ -1,16 +1,16 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://PlayerCharacterController.gd" type="Script" id=1]
-[ext_resource path="res://Nodes/CharacterController.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Nodes/Shield.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Assets/MC/DashTrail-Sheet.png" type="Texture" id=4]
-[ext_resource path="res://Nodes/Shine.png" type="Texture" id=5]
-[ext_resource path="res://Nodes/UI/HealthBarBig.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Nodes/Misc/DashBLast.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Nodes/Controller/PlayerCharacterController.gd" type="Script" id=1]
+[ext_resource path="res://Assets/MC/DashTrail-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Shine.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Audio/dash.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Audio/damage.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Audio/bash.wav" type="AudioStream" id=6]
+[ext_resource path="res://Nodes/UI/HealthBarBig.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Nodes/Misc/ShieldBash.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Audio/dash.wav" type="AudioStream" id=9]
-[ext_resource path="res://Assets/Audio/bash.wav" type="AudioStream" id=10]
-[ext_resource path="res://Assets/Audio/damage.wav" type="AudioStream" id=11]
+[ext_resource path="res://Nodes/Shield.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Nodes/Misc/DashBLast.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Nodes/Controller/CharacterController.tscn" type="PackedScene" id=11]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -25,9 +25,9 @@ _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 offsets = PoolRealArray( 0, 0.49162, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[node name="PlayerCharacterController" instance=ExtResource( 2 )]
+[node name="PlayerCharacterController" instance=ExtResource( 11 )]
 script = ExtResource( 1 )
-dash_blast = ExtResource( 7 )
+dash_blast = ExtResource( 10 )
 shield_bash = ExtResource( 8 )
 
 [node name="DashTimer" type="Timer" parent="." index="0"]
@@ -38,14 +38,14 @@ one_shot = true
 wait_time = 0.08
 one_shot = true
 
-[node name="Shield" parent="." index="2" instance=ExtResource( 3 )]
+[node name="Shield" parent="." index="2" instance=ExtResource( 9 )]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." index="3"]
 material = SubResource( 1 )
 emitting = false
 amount = 4
 local_coords = false
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 flag_align_y = true
 direction = Vector2( 0, 0 )
 spread = 0.0
@@ -58,7 +58,7 @@ position = Vector2( 0, -15 )
 emitting = false
 one_shot = true
 explosiveness = 0.8
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 spread = 180.0
 gravity = Vector2( 0, 0 )
 initial_velocity = 20.0
@@ -76,20 +76,20 @@ one_shot = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
 
-[node name="HealthBarBig" parent="CanvasLayer" index="0" instance=ExtResource( 6 )]
+[node name="HealthBarBig" parent="CanvasLayer" index="0" instance=ExtResource( 7 )]
 position = Vector2( 48, 24 )
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="." index="8"]
 pause_mode = 2
-stream = ExtResource( 9 )
+stream = ExtResource( 4 )
 
 [node name="DamageSound" type="AudioStreamPlayer2D" parent="." index="9"]
 pause_mode = 2
-stream = ExtResource( 11 )
+stream = ExtResource( 5 )
 
 [node name="BashSound" type="AudioStreamPlayer2D" parent="." index="10"]
 pause_mode = 2
-stream = ExtResource( 10 )
+stream = ExtResource( 6 )
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="DashBuffer" to="." method="_on_DashBuffer_timeout"]
 [connection signal="shield_hit" from="Shield" to="." method="_on_Shield_shield_hit"]

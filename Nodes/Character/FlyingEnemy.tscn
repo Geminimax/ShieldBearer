@@ -7,7 +7,8 @@
 [ext_resource path="res://Assets/EyeEnemy/EyeEnemy4.png" type="Texture" id=5]
 [ext_resource path="res://Assets/EyeEnemy/EyeEnemy3.png" type="Texture" id=6]
 [ext_resource path="res://Assets/EyeEnemy/EyeEnemy5.png" type="Texture" id=7]
-[ext_resource path="res://Nodes/FlyingEnemyController.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Nodes/Controller/FlyingEnemyController.tscn" type="PackedScene" id=8]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 11.3136, 5.17802 )

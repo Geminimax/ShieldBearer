@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Nodes/Character/CharacterBody.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/MC/MC3.png" type="Texture" id=2]
-[ext_resource path="res://Nodes/PlayerCharacterController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Nodes/Controller/PlayerCharacterController.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/MC/MC1.png" type="Texture" id=4]
 [ext_resource path="res://Assets/MC/MC7.png" type="Texture" id=5]
 [ext_resource path="res://Assets/MC/MC2.png" type="Texture" id=6]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/MC/MCDash2.png" type="Texture" id=13]
 [ext_resource path="res://Assets/MC/MCDash4.png" type="Texture" id=14]
 [ext_resource path="res://Assets/MC/MCDash1.png" type="Texture" id=15]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 5 )

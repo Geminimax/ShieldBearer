@@ -4,7 +4,8 @@
 [ext_resource path="res://Nodes/CannonHazard.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Nodes/Loot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Level/Level4.tscn" type="PackedScene" id=4]
-[ext_resource path="res://LevelText.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Nodes/LevelText.tscn" type="PackedScene" id=5]
+
 
 [node name="Level3" instance=ExtResource( 1 )]
 next_level = ExtResource( 4 )

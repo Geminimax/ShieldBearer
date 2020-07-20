@@ -1,4 +1,4 @@
-extends "res://Nodes/CharacterController.gd"
+extends "res://Nodes/Controller/CharacterController.gd"
 enum STATE{SLEEP,PORSUE,ATTACK,KNOCKBACK}
 var state = STATE.SLEEP
 # Declare member variables here. Examples:

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NormalMa_n.png-6238c3ca7efbacd56f0459b04f365bd4.stex"
+path="res://.import/Shine.png-9227c629cf2ccfc0a125d036a12ce352.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/NormalMa_n.png"
-dest_files=[ "res://.import/NormalMa_n.png-6238c3ca7efbacd56f0459b04f365bd4.stex" ]
+source_file="res://Assets/Shine.png"
+dest_files=[ "res://.import/Shine.png-9227c629cf2ccfc0a125d036a12ce352.stex" ]
 
 [params]
 
