@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Misc/Transition.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/Intro.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "MusicFade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "MusicStart"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
+}
+
+[node name="Main" type="Node2D"]
+pause_mode = 2
+script = ExtResource( 1 )
+level1 = ExtResource( 3 )
+
+[node name="LevelTransition" type="Timer" parent="."]
+pause_mode = 2
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Transition" parent="CanvasLayer" instance=ExtResource( 2 )]
+pause_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/MusicFade = SubResource( 1 )
+anims/MusicStart = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -80.0
+[connection signal="timeout" from="LevelTransition" to="." method="_on_LevelTransition_timeout"]
+[connection signal="fade_out_done" from="CanvasLayer/Transition" to="." method="_on_Transition_fade_out_done"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Nodes/EnemyController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/Projectile/ProjectileSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/Projectile/EyeProjectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Nodes/Misc/EyeShootBlast.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Nodes/Misc/ShootCharge.tscn" type="PackedScene" id=5]
+
+[node name="FlyingEnemyController" instance=ExtResource( 1 )]
+blast_anim = ExtResource( 4 )
+shoot_charge = ExtResource( 5 )
+
+[node name="CollectRadiusCircle" parent="." index="0"]
+radius = 34.0
+
+[node name="ShootTimer" type="Timer" parent="." index="1"]
+wait_time = 4.0
+one_shot = true
+
+[node name="ProjectileSpawner" parent="." index="2" instance=ExtResource( 2 )]
+speed = 80.0
+bullet = ExtResource( 3 )
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

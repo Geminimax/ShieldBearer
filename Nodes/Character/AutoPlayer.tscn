@@ -1,0 +1,81 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Nodes/Character/CharacterBody.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/AutoCharacterController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/Character/AutoPlayer.gd" type="Script" id=3]
+[ext_resource path="res://Assets/MCAuto/MCAUTO1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/MCAuto/MCAUTO7.png" type="Texture" id=5]
+[ext_resource path="res://Assets/MCAuto/MCAUTO8.png" type="Texture" id=6]
+[ext_resource path="res://Assets/MCAuto/MCAUTO5.png" type="Texture" id=7]
+[ext_resource path="res://Assets/MCAuto/MCAUTO6.png" type="Texture" id=8]
+[ext_resource path="res://Assets/MCAuto/MCAUTO2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/MCAuto/MCAUTO3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/MCAuto/MCAUTO4.png" type="Texture" id=11]
+[ext_resource path="res://Assets/MCAuto/MCAutoCollect.png" type="Texture" id=12]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 3.0
+height = 4.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4, 7 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform float whitening;
+
+void fragment() {
+    vec4 texture_color = texture(TEXTURE, UV);
+    COLOR = vec4(mix(texture_color.rgb, vec3(1,1,1), whitening), texture_color.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/whitening = 0.0
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "walk",
+"speed": 9.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": true,
+"name": "collect",
+"speed": 5.0
+} ]
+
+[node name="AutoPlayer" groups=[
+"player",
+"pushable_object",
+] instance=ExtResource( 1 )]
+collision_layer = 34
+script = ExtResource( 3 )
+controller_path = NodePath("AutoCharacterController")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="HitBox" parent="." index="2"]
+collision_layer = 34
+collision_mask = 28
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" parent="." index="3"]
+material = SubResource( 4 )
+frames = SubResource( 5 )
+animation = "idle"
+playing = true
+
+[node name="AutoCharacterController" parent="." index="5" instance=ExtResource( 2 )]
+[connection signal="area_entered" from="HitBox" to="AutoCharacterController" method="_on_HitBox_area_entered"]
+[connection signal="body_entered" from="HitBox" to="AutoCharacterController" method="_on_HitBox_body_entered"]

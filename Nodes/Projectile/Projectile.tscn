@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Nodes/Projectile/Projectile.gd" type="Script" id=1]
+[ext_resource path="res://Assets/projectileFire1.png" type="Texture" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+const float M_PI = 3.1415926538;
+uniform float hue_shift: hint_range(0,360);
+vec3 TransformH(
+    vec3 in_color,  // color to transform
+    float H
+)
+{
+  float U = cos(H * M_PI/180.0);
+  float W = sin(H * M_PI/180.0);
+
+  vec3 ret = vec3(0);
+  ret.r = (.299+.701 * U+.168* W) * in_color.r
+    + (.587-.587 * U+.330* W)* in_color.g
+    + (.114-.114 * U-.497* W)* in_color.b;
+  ret.g = (.299-.299 * U-.328* W)* in_color.r
+    + (.587+.413 * U+.035* W)* in_color.g
+    + (.114-.114 * U+.292* W)* in_color.b;
+  ret.b = (.299-.3 * U+1.25* W)* in_color.r
+    + (.587-.588 * U-1.05* W)* in_color.g
+    + (.114+.886 * U-.203* W)* in_color.b;
+  return ret;
+}
+
+vec3 RGBToHSV( vec3 RGB ){
+
+    vec4 k = vec4(0.0, -1.0/3.0, 2.0/3.0, -1.0);
+    vec4 p = RGB.g < RGB.b ? vec4(RGB.b, RGB.g, k.w, k.z) : vec4(RGB.gb, k.xy);
+    vec4 q = RGB.r < p.x   ? vec4(p.x, p.y, p.w, RGB.r) : vec4(RGB.r, p.yzx);
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(TEXTURE,base_uv);
+	COLOR = vec4(TransformH(albedo_tex.rgb, hue_shift), albedo_tex.a);
+}
+
+"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/hue_shift = 0.0
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 3.37727, 4.02279 )
+
+[node name="Projectile" type="Area2D" groups=[
+"damage",
+]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+material = SubResource( 2 )
+frames = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+[connection signal="area_entered" from="." to="." method="_on_Projectile_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_Projectile_body_entered"]

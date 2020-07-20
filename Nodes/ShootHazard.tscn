@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Nodes/Projectile/Projectile.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/Projectile/ProjectileSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/ShootHazard.gd" type="Script" id=4]
+
+[node name="ShootHazard" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="ProjectileSpawner" parent="." instance=ExtResource( 2 )]
+speed = 120.0
+bullet = ExtResource( 1 )
+direction = Vector2( 0, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.85
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

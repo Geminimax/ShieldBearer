@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://LevelText.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Reveal"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ForeText:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.3, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RichTextLabel:percent_visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.6, 2.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+
+[node name="LevelText" type="Control"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ForeText" type="RichTextLabel" parent="."]
+margin_right = 248.0
+margin_bottom = 108.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.172549, 0.172549, 0.172549, 1 )
+visible_characters = 0
+percent_visible = 0.0
+text = "ttatex"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_right = 248.0
+margin_bottom = 108.0
+custom_fonts/normal_font = SubResource( 1 )
+visible_characters = 0
+percent_visible = 0.0
+text = "Text text text"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Reveal"
+anims/Reveal = SubResource( 2 )

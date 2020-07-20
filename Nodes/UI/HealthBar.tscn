@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Heart1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Heart2.png" type="Texture" id=2]
+[ext_resource path="res://Nodes/UI/HealthBar.gd" type="Script" id=3]
+
+[node name="HealthBar" type="Node2D"]
+z_index = 100
+script = ExtResource( 3 )
+
+[node name="Empty" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="Filled" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Nodes/Misc/AnimatedSpriteEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast5.png" type="Texture" id=2]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast4.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="ShootCharge" instance=ExtResource( 1 )]
+z_index = 5
+frames = SubResource( 1 )
+frame = 5
+playing = true
+toplevel = false

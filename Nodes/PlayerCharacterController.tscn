@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://PlayerCharacterController.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/CharacterController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/Shield.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/MC/DashTrail-Sheet.png" type="Texture" id=4]
+[ext_resource path="res://Nodes/Shine.png" type="Texture" id=5]
+[ext_resource path="res://Nodes/UI/HealthBarBig.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Nodes/Misc/DashBLast.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Nodes/Misc/ShieldBash.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Audio/dash.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Audio/bash.wav" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Audio/damage.wav" type="AudioStream" id=11]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.49162, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[node name="PlayerCharacterController" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+dash_blast = ExtResource( 7 )
+shield_bash = ExtResource( 8 )
+
+[node name="DashTimer" type="Timer" parent="." index="0"]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashBuffer" type="Timer" parent="." index="1"]
+wait_time = 0.08
+one_shot = true
+
+[node name="Shield" parent="." index="2" instance=ExtResource( 3 )]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." index="3"]
+material = SubResource( 1 )
+emitting = false
+amount = 4
+local_coords = false
+texture = ExtResource( 4 )
+flag_align_y = true
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1.0
+anim_speed = 4.0
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="4"]
+position = Vector2( 0, -15 )
+emitting = false
+one_shot = true
+explosiveness = 0.8
+texture = ExtResource( 5 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+scale_amount = 1.5
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+
+[node name="KnockbackTimer" type="Timer" parent="." index="5"]
+one_shot = true
+
+[node name="InvencibilityTimer" type="Timer" parent="." index="6"]
+wait_time = 0.8
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="7"]
+
+[node name="HealthBarBig" parent="CanvasLayer" index="0" instance=ExtResource( 6 )]
+position = Vector2( 48, 24 )
+
+[node name="DashSound" type="AudioStreamPlayer2D" parent="." index="8"]
+pause_mode = 2
+stream = ExtResource( 9 )
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="." index="9"]
+pause_mode = 2
+stream = ExtResource( 11 )
+
+[node name="BashSound" type="AudioStreamPlayer2D" parent="." index="10"]
+pause_mode = 2
+stream = ExtResource( 10 )
+[connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="DashBuffer" to="." method="_on_DashBuffer_timeout"]
+[connection signal="shield_hit" from="Shield" to="." method="_on_Shield_shield_hit"]
+[connection signal="timeout" from="KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+[connection signal="timeout" from="InvencibilityTimer" to="." method="_on_InvencibilityTimer_timeout"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Nodes/Misc/AnimatedSpriteEffect.gd" type="Script" id=1]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast2.png" type="Texture" id=3]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast3.png" type="Texture" id=4]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast5.png" type="Texture" id=5]
+[ext_resource path="res://Assets/EyeEnemy/EyeShootBlast4.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 15.0
+} ]
+
+[node name="AnimatedSpriteEffect" type="AnimatedSprite"]
+frames = SubResource( 1 )
+script = ExtResource( 1 )
+[connection signal="animation_finished" from="." to="." method="_on_AnimatedSpriteEffect_animation_finished"]

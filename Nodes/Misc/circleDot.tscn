@@ -1,0 +1,19 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/circleDot4.png" type="Texture" id=1]
+[ext_resource path="res://Assets/circleDot5.png" type="Texture" id=2]
+[ext_resource path="res://Assets/circleDot1.png" type="Texture" id=3]
+[ext_resource path="res://Assets/circleDot2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/circleDot3.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="circleDot" type="AnimatedSprite"]
+frames = SubResource( 1 )
+playing = true

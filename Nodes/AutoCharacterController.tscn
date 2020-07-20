@@ -1,0 +1,97 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://AutoCharacterController.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/CharacterController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Nodes/Shine.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Pointer.png" type="Texture" id=4]
+[ext_resource path="res://Nodes/Pointer.gd" type="Script" id=5]
+[ext_resource path="res://Assets/QuestionMark2.png" type="Texture" id=6]
+[ext_resource path="res://Assets/QuestionMark1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/QuestionMark5.png" type="Texture" id=8]
+[ext_resource path="res://Assets/QuestionMark6.png" type="Texture" id=9]
+[ext_resource path="res://Assets/QuestionMark4.png" type="Texture" id=10]
+[ext_resource path="res://Assets/QuestionMark3.png" type="Texture" id=11]
+[ext_resource path="res://Nodes/UI/HealthBar.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets/Audio/damage.wav" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Audio/coinget.wav" type="AudioStream" id=14]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.49162, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 10 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="AutoCharacterController" instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+move_speed = 30.0
+
+[node name="RayCast2D" type="RayCast2D" parent="." index="0"]
+enabled = true
+
+[node name="KnockBackTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." index="2"]
+position = Vector2( 0, -15 )
+emitting = false
+one_shot = true
+explosiveness = 0.8
+texture = ExtResource( 3 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 20.0
+scale_amount = 1.5
+scale_amount_random = 1.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="Pointer" type="AnimatedSprite" parent="." index="3"]
+z_index = 10
+frames = SubResource( 3 )
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="Pointer" index="0"]
+
+[node name="HealthBar" parent="." index="4" instance=ExtResource( 12 )]
+position = Vector2( 0, 10 )
+
+[node name="Question" type="AnimatedSprite" parent="." index="5"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -15 )
+z_index = 12
+frames = SubResource( 4 )
+frame = 4
+playing = true
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="Question" index="0"]
+
+[node name="InvencibilityTimer" type="Timer" parent="." index="6"]
+one_shot = true
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="." index="7"]
+pause_mode = 2
+stream = ExtResource( 13 )
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="." index="8"]
+pause_mode = 2
+stream = ExtResource( 14 )
+[connection signal="timeout" from="KnockBackTimer" to="." method="_on_KnockBackTimer_timeout"]
+[connection signal="timeout" from="InvencibilityTimer" to="." method="_on_InvencibilityTimer_timeout"]

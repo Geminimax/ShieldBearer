@@ -1,0 +1,61 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Assets/Portal/OpeningAnim3.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Portal/OpeningAnim4.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Portal/PortalClosed3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Portal/OpeningAnim1.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Portal/OpeningAnim2.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Portal/OpeningAnim5.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Portal/PortalClosed4.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Portal/PortalClosed1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Portal/PortalClosed2.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Portal/PortalOpen4.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Portal/PortalOpen1.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Portal/PortalOpen5.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Portal/PortalOpen3.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Portal/PortalOpen2.png" type="Texture" id=14]
+[ext_resource path="res://Nodes/EndPoint.gd" type="Script" id=15]
+[ext_resource path="res://Assets/Shadow.png" type="Texture" id=16]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 11 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "open",
+"speed": 11.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 3 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "closed",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "opening",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.0098
+
+[node name="EndPoint" type="Position2D"]
+script = ExtResource( 15 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 12 )
+texture = ExtResource( 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "closed"
+frame = 2
+playing = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )
+disabled = true
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

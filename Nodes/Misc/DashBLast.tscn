@@ -1,0 +1,20 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Nodes/Misc/AnimatedSpriteEffect.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/MC/DashBlast3.png" type="Texture" id=2]
+[ext_resource path="res://Assets/MC/DashBlast4.png" type="Texture" id=3]
+[ext_resource path="res://Assets/MC/DashBlast2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/MC/DashBlast5.png" type="Texture" id=5]
+[ext_resource path="res://Assets/MC/DashBlast1.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "default",
+"speed": 25.0
+} ]
+
+[node name="DashBLast" instance=ExtResource( 1 )]
+frames = SubResource( 1 )
+toplevel = false

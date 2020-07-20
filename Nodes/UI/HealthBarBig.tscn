@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Nodes/UI/HealthBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/HeartBig2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/HeartBig1.png" type="Texture" id=3]
+
+[node name="HealthBarBig" instance=ExtResource( 1 )]
+sprite_width = 16
+center = false
+
+[node name="Empty" parent="." index="0"]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Filled" parent="." index="1"]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 16, 16 )

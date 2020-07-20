@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/transition.png" type="Texture" id=1]
+[ext_resource path="res://Nodes/Misc/Transition.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float cutoff : hint_range(0.0, 1.0);
+uniform float smooth_size : hint_range(0.0, 1.0);
+uniform sampler2D mask : hint_albedo;
+
+uniform vec4 color : hint_color;
+
+void fragment()
+{
+	float value = texture(mask, UV).r;
+	float alpha = smoothstep(cutoff, cutoff + smooth_size, value * (1.0 - smooth_size) + smooth_size);
+	COLOR = vec4(color.rgb, alpha) * textureLod(SCREEN_TEXTURE,SCREEN_UV,0.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/cutoff = 1.0
+shader_param/smooth_size = 0.25
+shader_param/color = null
+shader_param/mask = ExtResource( 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Fade-in"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Fade-out"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[node name="Transition" type="ColorRect"]
+material = SubResource( 2 )
+margin_left = -24.0
+margin_top = -16.0
+margin_right = 656.0
+margin_bottom = 376.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fade-in = SubResource( 3 )
+anims/Fade-out = SubResource( 4 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

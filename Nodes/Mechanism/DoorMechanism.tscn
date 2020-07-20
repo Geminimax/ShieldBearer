@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Nodes/Mechanism/Mechanism.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Nodes/Mechanism/DoorMechanism.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Door.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7, 16 )
+
+[node name="DoorMechanism" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="0"]
+collision_mask = 0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StaticBody2D" index="0"]
+frames = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="1"]
+shape = SubResource( 2 )
+
+[node name="Tween" type="Tween" parent="." index="1"]

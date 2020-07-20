@@ -1,0 +1,265 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Intro.gd" type="Script" id=1]
+[ext_resource path="res://Level/Level1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Intro/Agameby3.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Intro/geminimax2.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Intro/Agameby1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Intro/Agameby4.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Intro/Agameby2.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Intro/geminimax1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Intro/geminimax4.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Intro/geminimax3.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Intro/Bg.png" type="Texture" id=11]
+[ext_resource path="res://Assets/NewScreen2.png" type="Texture" id=12]
+[ext_resource path="res://Assets/NewScreen1.png" type="Texture" id=13]
+[ext_resource path="res://Assets/NewScreen3.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Fonts/rainyhearts.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Assets/Audio/coinget.wav" type="AudioStream" id=16]
+[ext_resource path="res://Assets/Audio/sb2.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Assets/NewScreen4.png" type="Texture" id=18]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 8 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bg3:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.670588 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 6.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Bg:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 3.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Bg2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Node2D/Bg3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AGameBy:modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Geminimax:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.6, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Node2D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 4.1, 4.7, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 0.5, 1 ),
+"update": 0,
+"values": [ Vector2( -700, 0 ), Vector2( -700, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Bg2:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 4.1, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, -300 ), Vector2( 0, -300 ), Vector2( 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("RichTextLabel:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 5.8, 6.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Bg3:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 4.9, 5.8, 6.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Bg4:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 3.7, 5.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 15 )
+
+[node name="Intro" type="Node2D"]
+script = ExtResource( 1 )
+next_level = ExtResource( 2 )
+music = ExtResource( 17 )
+
+[node name="AGameBy" type="AnimatedSprite" parent="."]
+position = Vector2( 72, 40 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+centered = false
+
+[node name="Geminimax" type="AnimatedSprite" parent="."]
+position = Vector2( 72, 40 )
+frames = SubResource( 2 )
+frame = 3
+playing = true
+centered = false
+
+[node name="Bg" type="Sprite" parent="."]
+texture = ExtResource( 11 )
+centered = false
+
+[node name="Bg4" type="Sprite" parent="."]
+texture = ExtResource( 18 )
+centered = false
+
+[node name="Bg3" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 14 )
+centered = false
+
+[node name="Bg2" type="Sprite" parent="."]
+texture = ExtResource( 12 )
+centered = false
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Bg3" type="Sprite" parent="Node2D"]
+texture = ExtResource( 13 )
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Start"
+anims/Idle = SubResource( 3 )
+anims/Start = SubResource( 4 )
+next/Start = "Idle"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 272.0
+margin_top = 316.0
+margin_right = 368.0
+margin_bottom = 356.0
+custom_fonts/normal_font = SubResource( 5 )
+text = "Click to start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+[connection signal="animation_changed" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_changed"]
